@@ -1,5 +1,4 @@
-﻿
-namespace DAL.Entities;
+﻿namespace DAL.Entities;
 
 public class Author : BaseEntity
 {
