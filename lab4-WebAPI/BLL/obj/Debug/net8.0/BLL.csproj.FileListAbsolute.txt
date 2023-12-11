@@ -1,0 +1,14 @@
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\bin\Debug\net8.0\BLL.deps.json
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\bin\Debug\net8.0\BLL.runtimeconfig.json
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\bin\Debug\net8.0\BLL.dll
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\bin\Debug\net8.0\BLL.pdb
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\obj\Debug\net8.0\BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\obj\Debug\net8.0\BLL.AssemblyInfoInputs.cache
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\obj\Debug\net8.0\BLL.AssemblyInfo.cs
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\obj\Debug\net8.0\BLL.csproj.CoreCompileInputs.cache
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\obj\Debug\net8.0\BLL.sourcelink.json
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\obj\Debug\net8.0\BLL.dll
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\obj\Debug\net8.0\refint\BLL.dll
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\obj\Debug\net8.0\BLL.pdb
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\obj\Debug\net8.0\BLL.genruntimeconfig.cache
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\obj\Debug\net8.0\ref\BLL.dll
