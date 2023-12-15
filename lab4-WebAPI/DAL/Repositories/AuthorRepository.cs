@@ -5,5 +5,5 @@ namespace DAL.Repositories;
 
 public class AuthorRepository(NewsSiteContext context) : BaseRepository<Author>(context), IRepository<Author>
 {
-    private readonly NewsSiteContext _context = context;
+
 }

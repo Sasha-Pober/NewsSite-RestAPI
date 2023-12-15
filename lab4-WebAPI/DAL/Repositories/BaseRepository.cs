@@ -1,28 +1,28 @@
-﻿using DAL.Interfaces;
+﻿using DAL.Entities;
+using DAL.Interfaces;
+using DAL.Specifications;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories;
 
-public class BaseRepository<T>(NewsSiteContext context) : IRepository<T> where T : class
+public class BaseRepository<T>(NewsSiteContext context) : IRepository<T> where T : BaseEntity
 {
-    private readonly NewsSiteContext _context = context;
+    private protected readonly NewsSiteContext _context = context;
 
     public async Task Create(T entity)
     {
         await _context.Set<T>().AddAsync(entity);
-        await _context.SaveChangesAsync();
     }
 
     public async Task Delete(int id)
     {
         var entity = await _context.Set<T>().FindAsync(id);
         _context.Set<T>().Remove(entity!);
-        await _context.SaveChangesAsync();
     }
 
-    public IQueryable<T> GetAll()
+    public async Task<IEnumerable<T>> GetAll()
     {
-        return _context.Set<T>();
+        return await _context.Set<T>().ToListAsync();
     }
 
     public async Task<T> GetById(int id)
@@ -30,9 +30,13 @@ public class BaseRepository<T>(NewsSiteContext context) : IRepository<T> where T
         return await _context.Set<T>().FindAsync(id);
     }
 
-    public async Task Update(int id, T entity)
+    public void Update(T entity)
     {
         _context.Set<T>().Update(entity);
-        await _context.SaveChangesAsync();
+    }
+
+    protected IQueryable<T> ApplySpecification(Specification<T> specification)
+    {
+        return SpecificationEvaluator.GetQuery(_context.Set<T>(), specification);
     }
 }

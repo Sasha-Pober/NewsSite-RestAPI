@@ -1,9 +1,14 @@
 ﻿using DAL.Entities;
 using DAL.Interfaces;
+using DAL.Specifications;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories;
 
 public class RubricRepository(NewsSiteContext context) : BaseRepository<Rubric>(context), IRepository<Rubric>
 {
-    private readonly NewsSiteContext _context = context;
+    public async Task<List<Rubric>> GetByIdWithNews(int id)
+    {
+        return await ApplySpecification(new RubricByIdWithNewsSpecification(id)).ToListAsync();
+    }
 }
