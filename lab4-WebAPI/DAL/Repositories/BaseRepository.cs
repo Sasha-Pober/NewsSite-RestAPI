@@ -29,10 +29,10 @@ public class BaseRepository<T>(NewsSiteContext context) : IRepository<T> where T
     {
         return await _context.Set<T>().FindAsync(id);
     }
-
-    public void Update(T entity)
+    //TODO: Add update implementation;
+    public async void Update(int id, T entity)
     {
-        _context.Set<T>().Update(entity);
+
     }
 
     protected IQueryable<T> ApplySpecification(Specification<T> specification)

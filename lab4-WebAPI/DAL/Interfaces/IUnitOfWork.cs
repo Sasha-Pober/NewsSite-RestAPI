@@ -1,12 +1,13 @@
 ﻿using DAL.Entities;
+using DAL.Repositories;
 
 namespace DAL.Interfaces;
 
 public interface IUnitOfWork
 {
-    IRepository<Author> AuthorRepository { get; }
-    IRepository<News> NewsRepository { get; }
-    IRepository<Tag> TagRepository { get; }
-    IRepository<Rubric> RubricRepository { get; }
+    IAuthorRepository AuthorRepository { get; }
+    INewsRepository NewsRepository { get; }
+    ITagRepository TagRepository { get; }
+    IRubricRepository RubricRepository { get; }
     Task SaveAsync();
 }

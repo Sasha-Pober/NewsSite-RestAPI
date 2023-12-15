@@ -26,12 +26,34 @@ public class NewsService(IUnitOfWork unit, IMapper mapper) : QueryService(unit, 
         await _unit.SaveAsync();
     }
 
+    public async Task DeleteByIdAndAuthorId(int newsId, int authorId)
+    {
+        var entity = await _unit.NewsRepository.GetByIdAndAuthorId(newsId, authorId);
+        var news = _mapper.Map<News>(entity);
+        await _unit.NewsRepository.Delete(news.Id);
+        await _unit.SaveAsync();
+    }
+
     public async Task<IEnumerable<NewsDTO>> GetAll()
     {
         var news = await _unit.NewsRepository.GetAll();
         var collection = _mapper.Map<IEnumerable<News>, IEnumerable<NewsDTO>>(news);
         return collection;
      
+    }
+
+    public async Task<IEnumerable<NewsDTO>> GetAllWithRubrics()
+    {
+        var collection = await _unit.NewsRepository.GetAllWithRubrics();
+        var result = _mapper.Map<IEnumerable<News>, IEnumerable<NewsDTO>>(collection);
+        return result;
+    }
+
+    public async Task<IEnumerable<NewsDTO>> GetByAuthorId(int id)
+    {
+        var collection = await _unit.NewsRepository.GetByAuthorId(id);
+        var result = _mapper.Map<IEnumerable<News>, IEnumerable<NewsDTO>>(collection);
+        return result;
     }
 
     public async Task<NewsDTO> GetById(int id)
@@ -43,6 +65,20 @@ public class NewsService(IUnitOfWork unit, IMapper mapper) : QueryService(unit, 
         return result;
     }
 
+    public async Task<IEnumerable<NewsDTO>> GetByRubricId(int id)
+    {
+        var collection = await _unit.NewsRepository.GetByRubricId(id);
+        var result = _mapper.Map<IEnumerable<News>, IEnumerable<NewsDTO>>(collection);
+        return result;
+    }
+
+    public async Task<IEnumerable<NewsDTO>> GetByTagId(int id)
+    {
+        var collection = await _unit.NewsRepository.GetByTagId(id);
+        var result = _mapper.Map<IEnumerable<News>, IEnumerable<NewsDTO>>(collection);
+        return result;
+    }
+
     public async void Update(NewsDTO entity)
     {
         _validator.ValidateAndThrow(entity);
@@ -51,5 +87,10 @@ public class NewsService(IUnitOfWork unit, IMapper mapper) : QueryService(unit, 
 
         _unit.NewsRepository.Update(news);
         await _unit.SaveAsync();
+    }
+
+    public async Task UpdateByIdAndAuthorId(NewsDTO entity, int newsId, int authorId)
+    {
+        
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories;
 
-public class RubricRepository(NewsSiteContext context) : BaseRepository<Rubric>(context), IRepository<Rubric>
+public class RubricRepository(NewsSiteContext context) : BaseRepository<Rubric>(context), IRubricRepository
 {
     public async Task<List<Rubric>> GetByIdWithNews(int id)
     {
