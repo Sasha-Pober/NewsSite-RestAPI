@@ -1,6 +1,6 @@
 ﻿namespace BLL.DTO;
 
-public class TagDTO
+public class TagDTO : BaseDTO
 {
     public string Name { get; set; } = null!;
 }

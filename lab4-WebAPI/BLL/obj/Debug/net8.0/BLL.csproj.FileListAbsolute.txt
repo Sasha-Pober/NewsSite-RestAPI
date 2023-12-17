@@ -12,3 +12,7 @@ C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\obj\Debug\net
 C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\obj\Debug\net8.0\BLL.pdb
 C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\obj\Debug\net8.0\BLL.genruntimeconfig.cache
 C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\obj\Debug\net8.0\ref\BLL.dll
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\bin\Debug\net8.0\DAL.dll
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\bin\Debug\net8.0\DAL.pdb
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\obj\Debug\net8.0\BLL.csproj.AssemblyReference.cache
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\BLL\obj\Debug\net8.0\BLL.csproj.CopyComplete

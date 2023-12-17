@@ -132,3 +132,8 @@ C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\WebAPI\obj\Debug\
 C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\WebAPI\obj\Debug\net8.0\WebAPI.pdb
 C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\WebAPI\obj\Debug\net8.0\WebAPI.genruntimeconfig.cache
 C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\WebAPI\obj\Debug\net8.0\ref\WebAPI.dll
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\WebAPI\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\WebAPI\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\WebAPI\bin\Debug\net8.0\FluentValidation.dll
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\WebAPI\bin\Debug\net8.0\BLL.dll
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\WebAPI\bin\Debug\net8.0\BLL.pdb

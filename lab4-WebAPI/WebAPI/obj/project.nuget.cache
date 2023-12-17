@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+/Xr5Q7l92vf7Opdf+eZT4ddCiFNKSjj/n6/1G5wOvN7JbD1eaquGQ1z4gegXSnQ9DkpZxOQHg5rqrluZjLl/A==",
+  "dgSpecHash": "nZGqdQBOvPrc8S/Mi59gEdsxxr73NfqQnCq5rNmK1x+/UsIUSEMvry9DRexpifwtdZx3KYJ/HAar7tXRhgjMaQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\HP\\Documents\\kpi\\.NET\\Part 2\\lab3-dotnet2\\lab4-WebAPI\\WebAPI\\WebAPI.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\HP\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\fluentvalidation\\11.8.1\\fluentvalidation.11.8.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.3\\microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",

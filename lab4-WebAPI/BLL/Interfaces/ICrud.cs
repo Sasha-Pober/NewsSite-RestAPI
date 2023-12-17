@@ -8,7 +8,7 @@ public interface ICrud<T> where T : class
 
     Task Create(T entity);
 
-    void Update(T entity);
+    Task Update(int id, T entity);
 
     Task Delete(int id);
 }

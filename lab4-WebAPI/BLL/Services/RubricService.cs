@@ -23,7 +23,8 @@ public class RubricService(IUnitOfWork unit, IMapper mapper) : QueryService(unit
 
     public async Task Delete(int id)
     {
-        await _unit.NewsRepository.Delete(id);
+        var rubric = await _unit.RubricRepository.GetById(id) ?? throw new NullReferenceException();
+        _unit.RubricRepository.Delete(rubric);
         await _unit.SaveAsync();
     }
 
@@ -36,16 +37,19 @@ public class RubricService(IUnitOfWork unit, IMapper mapper) : QueryService(unit
 
     public async Task<RubricDTO> GetById(int id)
     {
-        var entity = await _unit.RubricRepository.GetById(id);
+        var entity = await _unit.RubricRepository.GetById(id) ?? throw new NullReferenceException();
         var rubric = _mapper.Map<RubricDTO>(entity);
         return rubric;
     }
 
-    public async void Update(RubricDTO entity)
+    public async Task Update(int id, RubricDTO entity)
     {
         _validator.ValidateAndThrow(entity);
 
-        var rubric = _mapper.Map<Rubric>(entity);
+        var rubric = await _unit.RubricRepository.GetById(id) ?? throw new NullReferenceException();
+
+        rubric.Name = entity.Name;
+
         _unit.RubricRepository.Update(rubric);
         await _unit.SaveAsync();
     }

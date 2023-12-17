@@ -1,6 +1,6 @@
 ﻿namespace BLL.DTO;
 
-public class AuthorDTO
+public class AuthorDTO : BaseDTO
 {
     public string Name { get; set; } = null!;
     public string Email { get; set; } = null!;

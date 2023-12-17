@@ -8,9 +8,9 @@ public class MapperProfile : Profile
 {
     public MapperProfile()
     {
-        CreateMap<AuthorDTO, Author>();
-        CreateMap<NewsDTO, News>();
-        CreateMap<RubricDTO, Rubric>();
-        CreateMap<TagDTO, Tag>();
+        CreateMap<AuthorDTO, Author>().ReverseMap();
+        CreateMap<NewsDTO, News>().ReverseMap();
+        CreateMap<RubricDTO, Rubric>().ReverseMap();
+        CreateMap<TagDTO, Tag>().ReverseMap();
     }
 }

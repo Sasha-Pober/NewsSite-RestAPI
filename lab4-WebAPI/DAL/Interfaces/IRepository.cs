@@ -8,8 +8,8 @@ public interface IRepository<T>
 
     Task Create(T entity);
 
-    void Update(int id, T entity);
+    void Update(T entity);
 
-    Task Delete(int id);
+    void Delete(T entity);
 
 }

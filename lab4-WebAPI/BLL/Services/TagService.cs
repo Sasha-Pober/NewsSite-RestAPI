@@ -24,7 +24,8 @@ public class TagService(IUnitOfWork unit, IMapper mapper) : QueryService(unit, m
 
     public async Task Delete(int id)
     {
-        await _unit.TagRepository.Delete(id);
+        var tag = await _unit.TagRepository.GetById(id) ?? throw new NullReferenceException();
+        _unit.TagRepository.Delete(tag);
         await _unit.SaveAsync();
     }
 
@@ -42,11 +43,13 @@ public class TagService(IUnitOfWork unit, IMapper mapper) : QueryService(unit, m
         return tag;
     }
 
-    public async void Update(TagDTO entity)
+    public async Task Update(int id, TagDTO entity)
     {
         _validator.ValidateAndThrow(entity);
 
-        var tag = _mapper.Map<Tag>(entity);
+        var tag = await _unit.TagRepository.GetById(id);
+        tag.Name = entity.Name;
+
         _unit.TagRepository.Update(tag);
         await _unit.SaveAsync();
     }

@@ -14,10 +14,9 @@ public class BaseRepository<T>(NewsSiteContext context) : IRepository<T> where T
         await _context.Set<T>().AddAsync(entity);
     }
 
-    public async Task Delete(int id)
+    public void Delete(T entity)
     {
-        var entity = await _context.Set<T>().FindAsync(id);
-        _context.Set<T>().Remove(entity!);
+        _context.Set<T>().Remove(entity);
     }
 
     public async Task<IEnumerable<T>> GetAll()
@@ -29,10 +28,10 @@ public class BaseRepository<T>(NewsSiteContext context) : IRepository<T> where T
     {
         return await _context.Set<T>().FindAsync(id);
     }
-    //TODO: Add update implementation;
-    public async void Update(int id, T entity)
-    {
 
+    public void Update(T entity)
+    {
+        _context.Entry(entity).State = EntityState.Modified;
     }
 
     protected IQueryable<T> ApplySpecification(Specification<T> specification)
