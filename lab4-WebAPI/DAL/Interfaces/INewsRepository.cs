@@ -4,6 +4,7 @@ namespace DAL.Interfaces;
 
 public interface INewsRepository : IRepository<News>
 {
+    Task<IEnumerable<News>> GetAllWithTags();
     Task<IEnumerable<News>> GetAllWithRubrics();
     Task<IEnumerable<News>> GetByRubricId(int id);
     Task<IEnumerable<News>> GetByTagId(int id);

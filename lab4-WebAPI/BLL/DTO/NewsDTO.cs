@@ -7,5 +7,6 @@ public class NewsDTO : BaseDTO
     public DateTime Date {  get; set; }
     public int AuthorId{ get; set; }
     public int RubricId { get; set; }
+    public List<string> Tags { get; set; } = [];
 
 }

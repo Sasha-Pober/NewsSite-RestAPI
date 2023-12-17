@@ -17,6 +17,11 @@ public class NewsRepository(NewsSiteContext context) : BaseRepository<News>(cont
         return await ApplySpecification(new NewsWithRubricsSpecification()).ToListAsync();
     }
 
+    public async Task<IEnumerable<News>> GetAllWithTags()
+    {
+        return await ApplySpecification(new NewsWithTagsSpecification()).ToListAsync();
+    }
+
     public async Task<IEnumerable<News>> GetByAuthorId(int id)
     {
         return await ApplySpecification(new NewsByAuthorsIdSpecification(id)).ToListAsync();

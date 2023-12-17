@@ -6,6 +6,7 @@ using DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using System.Reflection;
+using BLL.MapperMethods;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +28,7 @@ builder.Services.AddScoped<IRubricService, RubricService>();
 var connectionString = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddDbContext<NewsSiteContext>(opt => opt.UseSqlServer(connectionString));
 
-builder.Services.AddAutoMapper(typeof(BLL.MapperProfile));
+builder.Services.AddAutoMapper(typeof(MapperProfile));
 
 var app = builder.Build();
 

@@ -8,8 +8,8 @@ public class News : BaseEntity
     public DateTime Date { get; set; }
     public int AuthorId { get; set; }
     public Author Author { get; set; } = null!;
-    public List<NewsWithTag> NewsWithTags { get; } = [];
-    public List<Tag> Tags { get; } = [];
+    public List<NewsWithTag> NewsWithTags { get; set; } = [];
+    public List<Tag> Tags { get; set; } = [];
     public int RubricId { get; set; }
     public Rubric Rubric { get; set; } = null!;
 

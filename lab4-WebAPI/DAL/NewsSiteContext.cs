@@ -7,7 +7,6 @@ public class NewsSiteContext(DbContextOptions<NewsSiteContext> options) : DbCont
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
         modelBuilder.Entity<News>()
         .HasMany(e => e.Tags)
         .WithMany(e => e.News)
