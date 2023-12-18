@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace DAL.Entities;
 
 public class News : BaseEntity
@@ -8,6 +10,8 @@ public class News : BaseEntity
     public DateTime Date { get; set; }
     public int AuthorId { get; set; }
     public Author Author { get; set; } = null!;
+
+    [ForeignKey("NewsId")]
     public List<NewsWithTag> NewsWithTags { get; set; } = [];
     public List<Tag> Tags { get; set; } = [];
     public int RubricId { get; set; }

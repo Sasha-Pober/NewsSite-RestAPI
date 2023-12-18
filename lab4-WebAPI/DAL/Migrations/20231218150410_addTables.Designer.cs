@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(NewsSiteContext))]
-    [Migration("20231210220237_addTables")]
+    [Migration("20231218150410_addTables")]
     partial class addTables
     {
         /// <inheritdoc />

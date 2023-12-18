@@ -11,4 +11,9 @@ public class RubricRepository(NewsSiteContext context) : BaseRepository<Rubric>(
     {
         return await ApplySpecification(new RubricByIdWithNewsSpecification(id)).ToListAsync();
     }
+
+    public async Task<Rubric> GetByName(string name)
+    {
+        return await ApplySpecification(new RubricByNameSpecification(name)).FirstOrDefaultAsync();
+    }
 }

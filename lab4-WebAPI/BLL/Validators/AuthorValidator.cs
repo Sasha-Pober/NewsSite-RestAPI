@@ -8,6 +8,6 @@ public class AuthorValidator : AbstractValidator<AuthorDTO>
     public AuthorValidator()
     {
         RuleFor(x => x.Email).EmailAddress().WithMessage("Check your email!");
-        RuleFor(x => x.Password).Length(8);
+        RuleFor(x => x.Password).NotNull();
     }
 }

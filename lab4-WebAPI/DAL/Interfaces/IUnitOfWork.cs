@@ -9,5 +9,6 @@ public interface IUnitOfWork
     INewsRepository NewsRepository { get; }
     ITagRepository TagRepository { get; }
     IRubricRepository RubricRepository { get; }
+    INewsWithTagRepository NewsWithTagRepository { get; }
     Task SaveAsync();
 }

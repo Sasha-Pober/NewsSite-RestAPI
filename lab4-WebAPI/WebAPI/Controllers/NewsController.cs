@@ -1,5 +1,6 @@
 ﻿using BLL.DTO;
 using BLL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.HelpClasses;
 
@@ -77,6 +78,7 @@ public class NewsController(INewsService service) : Controller
 
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> PostNews([FromBody] NewsDTO news)
     {
@@ -91,6 +93,7 @@ public class NewsController(INewsService service) : Controller
         }
     }
 
+    [Authorize]
     [HttpPut("{newsId}/authors/{authorId}")]
     public async Task<IActionResult> UpdateAuthorsNews(int newsId, int authorId, [FromBody] NewsDTO newsdto)
     {
@@ -105,6 +108,7 @@ public class NewsController(INewsService service) : Controller
         }
     }
 
+    [Authorize]
     [HttpDelete("{newsId}/authors/{authorId}")]
     public async Task<IActionResult> DeleteAuthorsNews(int newsId, int authorId)
     {

@@ -1,12 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace BLL.Services
+namespace BLL.Services;
+
+public static class PasswordHashingService
 {
-    internal class PasswordHashingService
+    public static string GetHashedPassword(string password)
     {
+        ArgumentNullException.ThrowIfNull(password);
+
+        byte[] hash = SHA256.HashData(Encoding.UTF8.GetBytes(password));
+
+        StringBuilder sb = new StringBuilder();
+        foreach (byte b in hash)
+        {
+            sb.Append(b);
+        }
+        return sb.ToString();
     }
 }

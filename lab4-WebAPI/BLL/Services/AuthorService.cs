@@ -8,14 +8,19 @@ using FluentValidation;
 
 namespace BLL.Services;
 
-public class AuthorService(IUnitOfWork unit, IMapper mapper) : QueryService(unit, mapper), IAuthorService
+public class AuthorService(IUnitOfWork unit, IMapper mapper, IAuthService auth) : QueryService(unit, mapper), IAuthorService
 {
     private readonly AuthorValidator validator = new();
+    private readonly IAuthService _auth = auth;
+
     public async Task Create(AuthorDTO entity)
     {
         validator.ValidateAndThrow(entity);
 
+        if (await _auth.CheckIfRegistered(entity.Email)) throw new Exception("User is already registered");
+
         var ent = _mapper.Map<Author>(entity);
+        ent.Password = PasswordHashingService.GetHashedPassword(ent.Password);
 
         await _unit.AuthorRepository.Create(ent);
         await _unit.SaveAsync();
@@ -50,7 +55,7 @@ public class AuthorService(IUnitOfWork unit, IMapper mapper) : QueryService(unit
 
         author.Name = entity.Name;
         author.Email = entity.Email;
-        author.Password = entity.Password;
+        author.Password = PasswordHashingService.GetHashedPassword(entity.Password);
 
         _unit.AuthorRepository.Update(author);
         await _unit.SaveAsync();

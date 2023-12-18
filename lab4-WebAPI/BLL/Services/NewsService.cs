@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BLL.DTO;
 using BLL.Interfaces;
+using BLL.MapperMethods;
 using BLL.Validators;
 using DAL.Entities;
 using DAL.Interfaces;
@@ -8,17 +9,17 @@ using FluentValidation;
 
 namespace BLL.Services;
 
-public class NewsService(IUnitOfWork unit, IMapper mapper) : QueryService(unit, mapper), INewsService
+public class NewsService(IUnitOfWork unit) : QueryService(unit, null), INewsService
 {
     private readonly NewsValidator _validator = new();
+    private readonly NewsMapper _newsMapper = new(unit);
     public async Task Create(NewsDTO entity)
     {
         _validator.ValidateAndThrow(entity);
 
-        var news = _mapper.Map<News>(entity);
+        var news = await _newsMapper.MapNewsFromDTO(entity);
 
         news.Date = DateTime.Now;
-        news.Tags = await MapTagsFromDTO(entity.Tags);
 
         await _unit.NewsRepository.Create(news);
         await _unit.SaveAsync();
@@ -42,8 +43,7 @@ public class NewsService(IUnitOfWork unit, IMapper mapper) : QueryService(unit, 
     public async Task<IEnumerable<NewsDTO>> GetAll()
     {
         var news = await _unit.NewsRepository.GetAllWithTags();
-        var collection = _mapper.Map<IEnumerable<News>, List<NewsDTO>>(news);
-        MapTagsToDTO(news, collection);
+        var collection = await _newsMapper.MapNewsToDTO(news);
         return collection;
      
     }
@@ -51,16 +51,15 @@ public class NewsService(IUnitOfWork unit, IMapper mapper) : QueryService(unit, 
     public async Task<IEnumerable<NewsDTO>> GetAllWithRubrics()
     {
         var collection = await _unit.NewsRepository.GetAllWithRubrics();
-        var result = _mapper.Map<IEnumerable<News>, List<NewsDTO>>(collection);
-        MapTagsToDTO(collection, result);
+        var result = await _newsMapper.MapNewsToDTO(collection);
+
         return result;
     }
 
     public async Task<IEnumerable<NewsDTO>> GetByAuthorId(int id)
     {
         var collection = await _unit.NewsRepository.GetByAuthorId(id) ?? throw new NullReferenceException();
-        var result = _mapper.Map<IEnumerable<News>, List<NewsDTO>>(collection);
-        MapTagsToDTO(collection, result);
+        var result = await _newsMapper.MapNewsToDTO(collection);
         return result;
     }
 
@@ -68,7 +67,7 @@ public class NewsService(IUnitOfWork unit, IMapper mapper) : QueryService(unit, 
     {
         var news = await _unit.NewsRepository.GetById(id) ?? throw new NullReferenceException();
 
-        var result = _mapper.Map<NewsDTO>(news);
+        var result = await _newsMapper.MapNewsToDTO(news);
 
         return result;
     }
@@ -76,16 +75,14 @@ public class NewsService(IUnitOfWork unit, IMapper mapper) : QueryService(unit, 
     public async Task<IEnumerable<NewsDTO>> GetByRubricId(int id)
     {
         var collection = await _unit.NewsRepository.GetByRubricId(id) ?? throw new NullReferenceException();
-        var result = _mapper.Map<IEnumerable<News>, List<NewsDTO>>(collection);
-        MapTagsToDTO(collection, result);
+        var result = await _newsMapper.MapNewsToDTO(collection);
         return result;
     }
 
     public async Task<IEnumerable<NewsDTO>> GetByTagId(int id)
     {
         var collection = await _unit.NewsRepository.GetByTagId(id) ?? throw new NullReferenceException();
-        var result = _mapper.Map<IEnumerable<News>, List<NewsDTO>>(collection);
-        MapTagsToDTO(collection, result);
+        var result = await _newsMapper.MapNewsToDTO(collection);
         return result;
     }
 
@@ -95,11 +92,15 @@ public class NewsService(IUnitOfWork unit, IMapper mapper) : QueryService(unit, 
 
         var news = await _unit.NewsRepository.GetById(id) ?? throw new NullReferenceException();
 
+        var author = await _unit.AuthorRepository.GetByName(entity.AuthorName);
+        var rubric = await _unit.RubricRepository.GetByName(entity.RubricName);
+        var tags = await _newsMapper.UpdateMapTagsFromDTO(id, entity.Tags);
+
         news.Title = entity.Title;
         news.Body = entity.Body;
-        news.AuthorId = entity.AuthorId;
-        news.RubricId = entity.RubricId;
-        news.Tags = await MapTagsFromDTO(entity.Tags);
+        news.AuthorId = author.Id;
+        news.RubricId = rubric.Id;
+        news.Tags = tags;
 
         _unit.NewsRepository.Update(news);
         await _unit.SaveAsync();
@@ -111,45 +112,17 @@ public class NewsService(IUnitOfWork unit, IMapper mapper) : QueryService(unit, 
 
         var news = await _unit.NewsRepository.GetByIdAndAuthorId(newsId, authorId) ?? throw new NullReferenceException();
 
+        var author = await _unit.AuthorRepository.GetByName(entity.AuthorName);
+        var rubric = await _unit.RubricRepository.GetByName(entity.RubricName);
+        var tags = await _newsMapper.UpdateMapTagsFromDTO(newsId, entity.Tags);
+
         news.Title = entity.Title;
         news.Body = entity.Body;
-        news.AuthorId = entity.AuthorId;
-        news.RubricId = entity.RubricId;
+        news.AuthorId = author.Id;
+        news.RubricId = rubric.Id;
+        news.Tags = tags;
 
         _unit.NewsRepository.Update(news);
         await _unit.SaveAsync();
-    }
-
-    private async Task<List<Tag>> MapTagsFromDTO(List<string> tagNames)
-    {
-        var tags = new List<Tag>();
-        foreach (var tag in tagNames)
-        {
-            var tg = await _unit.TagRepository.GetByName(tag);
-            if (tg != null)
-                tags.Add(tg);
-
-        }
-        return tags;
-    }
-
-    private List<string> MapTagsToDTO(List<Tag> tags)
-    {
-        var tagNames = new List<string>();
-        foreach (var tag in tags)
-        {
-            tagNames.Add(tag.Name);
-        }
-        return tagNames;
-    }
-
-
-    private void MapTagsToDTO(IEnumerable<News> news, List<NewsDTO> newsDto)
-    {
-        var newsList = news.ToList();
-        for(int i = 0; i < newsDto.Count; i++) 
-        {
-            newsDto[i].Tags = MapTagsToDTO(newsList[i].Tags);
-        }
     }
 }

@@ -137,3 +137,4 @@ C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\WebAPI\bin\Debug\
 C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\WebAPI\bin\Debug\net8.0\FluentValidation.dll
 C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\WebAPI\bin\Debug\net8.0\BLL.dll
 C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\WebAPI\bin\Debug\net8.0\BLL.pdb
+C:\Users\HP\Documents\kpi\.NET\Part 2\lab3-dotnet2\lab4-WebAPI\WebAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

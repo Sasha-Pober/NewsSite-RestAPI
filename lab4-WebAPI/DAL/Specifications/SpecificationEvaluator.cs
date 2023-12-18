@@ -5,7 +5,7 @@ namespace DAL.Specifications;
 
 public static class SpecificationEvaluator
 {
-    public static IQueryable<T> GetQuery<T>(IQueryable<T> inputQuery, Specification<T> specification) where T : BaseEntity
+    public static IQueryable<T> GetQuery<T>(IQueryable<T> inputQuery, Specification<T> specification) where T : class
     {
         IQueryable<T> queryable = inputQuery;
 
@@ -24,6 +24,11 @@ public static class SpecificationEvaluator
         else if(specification.OrderByDescendingExpression is not null) 
         {
             queryable = queryable.OrderByDescending(specification.OrderByDescendingExpression);
+        }
+
+        if(specification.SelectExpression is not null)
+        {
+            queryable = (IQueryable<T>) queryable.Select(specification.SelectExpression);
         }
 
         if(specification.IsSplitQuery)

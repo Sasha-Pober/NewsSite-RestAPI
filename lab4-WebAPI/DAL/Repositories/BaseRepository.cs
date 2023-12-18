@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories;
 
-public class BaseRepository<T>(NewsSiteContext context) : IRepository<T> where T : BaseEntity
+public class BaseRepository<T>(NewsSiteContext context) : IRepository<T> where T : class
 {
     private protected readonly NewsSiteContext _context = context;
 

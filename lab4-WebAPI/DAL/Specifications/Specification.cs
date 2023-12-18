@@ -3,12 +3,13 @@ using System.Linq.Expressions;
 
 namespace DAL.Specifications;
 
-public abstract class Specification<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity
+public abstract class Specification<T>(Expression<Func<T, bool>> criteria) where T : class
 {
     public Expression<Func<T, bool>>? Criteria { get; } = criteria;
     public List<Expression<Func<T, object>>> IncludeExpressions { get; } = [];
     public Expression<Func<T, object>>? OrderByExpression { get; private set; }
     public Expression<Func<T, object>>? OrderByDescendingExpression { get; private set; }
+    public Expression<Func<T, object>>? SelectExpression { get; private set; }
     public bool IsSplitQuery { get; protected set; }
 
     protected void AddInclude(Expression<Func<T, object>> includeExpression) => 
@@ -19,5 +20,8 @@ public abstract class Specification<T>(Expression<Func<T, bool>> criteria) where
 
     protected void AddOrderDescendingBy(Expression<Func<T, object>> orderByDescendingExpression) =>
         OrderByDescendingExpression = orderByDescendingExpression;
+
+    protected void AddSelect(Expression<Func<T, object>> selectExpression) =>
+        SelectExpression = selectExpression;
 
 }

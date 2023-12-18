@@ -15,6 +15,7 @@ public class UnitOfWork(NewsSiteContext siteContext) : IUnitOfWork
     public ITagRepository TagRepository => new TagRepository(_siteContext);
 
     public IRubricRepository RubricRepository => new RubricRepository(_siteContext);
+    public INewsWithTagRepository NewsWithTagRepository => new NewsWithTagRepository(_siteContext);
 
     public async Task SaveAsync()
     {

@@ -9,7 +9,7 @@ public class NewsValidator : AbstractValidator<NewsDTO>
     {
         RuleFor(x => x.Title).NotNull().NotEmpty(); 
         RuleFor(x => x.Body).NotNull().NotEmpty();
-        RuleFor(x => x.AuthorId).NotNull().NotEmpty().GreaterThan(0);
-        RuleFor(x => x.RubricId).NotNull().NotEmpty().GreaterThan(0);
+        RuleFor(x => x.AuthorName).NotNull().NotEmpty();
+        RuleFor(x => x.RubricName).NotNull().NotEmpty();
     }
 }
