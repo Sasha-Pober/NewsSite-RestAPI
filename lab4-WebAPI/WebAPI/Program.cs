@@ -17,17 +17,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
 builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<IRubricRepository, RubricRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<INewsService, NewsService>();
 builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<IRubricService, RubricService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+
+builder.Services.AddScoped<MapperProfile>();
 
 var connectionString = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddDbContext<NewsSiteContext>(opt => opt.UseSqlServer(connectionString));
@@ -48,7 +50,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 builder.Services.AddAuthorization();
-
 
 builder.Services.AddAutoMapper(typeof(MapperProfile));
 

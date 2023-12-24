@@ -21,12 +21,6 @@ public class AuthService(IUnitOfWork unit, IConfiguration configuration) : IAuth
         return collection.Any(x => x.Email.Equals(email));
     }
 
-    public async Task<Author> GetEntity(LoginRequest author)
-    {
-        return await _unit.AuthorRepository.GetByEmailAndPassword(author.Email, author.Password)
-            ?? throw new NullReferenceException();
-    }
-
     public string CreateToken(Author author)
     {
         var tokenHandler = new JwtSecurityTokenHandler();

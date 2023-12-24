@@ -40,7 +40,7 @@ public class AuthentificationController : Controller
             var entity = author;
             entity.Password = PasswordHashingService.GetHashedPassword(entity.Password);
 
-            string token = _auth.CreateToken(await _auth.GetEntity(entity));
+            string token = _auth.CreateToken(await _authorService.GetEntity(entity));
             return Ok(token);
         }
         catch (Exception ex)

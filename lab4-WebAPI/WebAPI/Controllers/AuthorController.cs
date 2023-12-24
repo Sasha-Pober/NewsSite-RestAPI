@@ -1,6 +1,7 @@
 ﻿using BLL.DTO;
 using BLL.Interfaces;
 using DAL.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.HelpClasses;
 namespace WebAPI.Controllers;
@@ -31,6 +32,7 @@ public class AuthorController(IAuthorService service) : Controller
         }
     }
 
+    [Authorize]
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateAuthor(int id, [FromBody] AuthorDTO author)
     {
@@ -45,6 +47,7 @@ public class AuthorController(IAuthorService service) : Controller
         }
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAuthor(int id)
     {

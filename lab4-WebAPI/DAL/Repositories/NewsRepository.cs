@@ -12,7 +12,7 @@ public class NewsRepository(NewsSiteContext context) : BaseRepository<News>(cont
         return await ApplySpecification(new NewsByIdWithAuthorIdSpecification(newsId, authorId)).FirstOrDefaultAsync();
     }
 
-    public async Task<IEnumerable<News>> GetAllWithRubrics()
+    public async Task<IEnumerable<News>> GetAllWithDetailsOrderByRubrics()
     {
         return await ApplySpecification(new NewsWithRubricsSpecification()).ToListAsync();
     }
@@ -35,5 +35,15 @@ public class NewsRepository(NewsSiteContext context) : BaseRepository<News>(cont
     public async Task<IEnumerable<News>> GetByTagId(int id)
     {
         return await ApplySpecification(new NewsByTagIdSpecification(id)).ToListAsync();
+    }
+
+    public async Task<News> GetByIdWithTags(int id)
+    {
+        return await ApplySpecification(new NewsByIdWithTagSpecification(id)).FirstOrDefaultAsync();
+    }
+
+    public async Task<IEnumerable<News>> GetBetweenDates(DateTime dateFrom, DateTime dateTo)
+    {
+        return await ApplySpecification(new NewsBetweenDatesSpecification(dateFrom, dateTo)).ToListAsync();
     }
 }

@@ -14,7 +14,7 @@ public class NewsController(INewsService service) : Controller
     [HttpGet]
     public async Task<IActionResult> GetAllNews()
     {
-        var collection = await _newsService.GetAllWithRubrics();
+        var collection = await _newsService.GetAll();
         return Ok(collection);
     }
 
@@ -54,6 +54,21 @@ public class NewsController(INewsService service) : Controller
         try
         {
             var news = await _newsService.GetByRubricId(id);
+            return Ok(news);
+        }
+        catch (Exception ex)
+        {
+            return ExceptionHandler.OnException(ex);
+        }
+
+    }
+
+    [HttpGet("dates/{dateFrom}&{dateTo}")]
+    public async Task<IActionResult> GetNewsBetweenDates(DateTime dateFrom, DateTime dateTo)
+    {
+        try
+        {
+            var news = await _newsService.GetBetweenDates(dateFrom, dateTo);
             return Ok(news);
         }
         catch (Exception ex)

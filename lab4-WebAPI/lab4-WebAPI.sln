@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{E16DC8A5-1366-426A-B44D-AD50623FBF66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{E16DC8A5-1366-426A-B44D-AD50623FBF66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{3B1C31A2-D381-46AD-A087-EFE6D07C9917}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{3B1C31A2-D381-46AD-A087-EFE6D07C9917}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{063184DD-871D-422A-AF49-10E2F3A96710}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{063184DD-871D-422A-AF49-10E2F3A96710}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsSite.Tests", "NewsSite.Tests\NewsSite.Tests.csproj", "{9767BABC-443B-4CCA-99F4-B5FB919F0586}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{063184DD-871D-422A-AF49-10E2F3A96710}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{063184DD-871D-422A-AF49-10E2F3A96710}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{063184DD-871D-422A-AF49-10E2F3A96710}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9767BABC-443B-4CCA-99F4-B5FB919F0586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9767BABC-443B-4CCA-99F4-B5FB919F0586}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9767BABC-443B-4CCA-99F4-B5FB919F0586}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9767BABC-443B-4CCA-99F4-B5FB919F0586}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

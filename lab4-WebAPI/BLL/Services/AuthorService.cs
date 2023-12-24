@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BLL.DTO;
 using BLL.Interfaces;
+using BLL.Request;
 using BLL.Validators;
 using DAL.Entities;
 using DAL.Interfaces;
@@ -17,7 +18,7 @@ public class AuthorService(IUnitOfWork unit, IMapper mapper, IAuthService auth) 
     {
         validator.ValidateAndThrow(entity);
 
-        if (await _auth.CheckIfRegistered(entity.Email)) throw new Exception("User is already registered");
+        if (await _auth.CheckIfRegistered(entity.Email)) throw new Exception("Author is already registered");
 
         var ent = _mapper.Map<Author>(entity);
         ent.Password = PasswordHashingService.GetHashedPassword(ent.Password);
@@ -28,7 +29,7 @@ public class AuthorService(IUnitOfWork unit, IMapper mapper, IAuthService auth) 
 
     public async Task Delete(int id)
     {
-        var author = await _unit.AuthorRepository.GetById(id) ?? throw new NullReferenceException();
+        var author = await _unit.AuthorRepository.GetById(id) ?? throw new Exception("There is no such author");
         _unit.AuthorRepository.Delete(author);
         await _unit.SaveAsync();
     }
@@ -42,7 +43,7 @@ public class AuthorService(IUnitOfWork unit, IMapper mapper, IAuthService auth) 
 
     public async Task<AuthorDTO> GetById(int id)
     {
-        var entity = await _unit.AuthorRepository.GetById(id) ?? throw new NullReferenceException();
+        var entity = await _unit.AuthorRepository.GetById(id) ?? throw new Exception("There is no such author");
         var author =  _mapper.Map<AuthorDTO>(entity);
         return author;
     }
@@ -51,7 +52,9 @@ public class AuthorService(IUnitOfWork unit, IMapper mapper, IAuthService auth) 
     {
         validator.ValidateAndThrow(entity);
 
-        var author = await _unit.AuthorRepository.GetById(id) ?? throw new NullReferenceException();
+        if (await CheckIfExists(entity)) throw new Exception("This author is already exists");
+
+        var author = await _unit.AuthorRepository.GetById(id) ?? throw new Exception("There is no such author");
 
         author.Name = entity.Name;
         author.Email = entity.Email;
@@ -60,4 +63,19 @@ public class AuthorService(IUnitOfWork unit, IMapper mapper, IAuthService auth) 
         _unit.AuthorRepository.Update(author);
         await _unit.SaveAsync();
     }
+
+    public async Task<Author> GetEntity(LoginRequest author)
+    {
+        return await _unit.AuthorRepository.GetByEmailAndPassword(author.Email, author.Password)
+            ?? throw new NullReferenceException();
+    }
+
+    private async Task<bool> CheckIfExists(AuthorDTO author)
+    {
+        var collection = await _unit.AuthorRepository.GetAll();
+
+        return collection.Any(n => n.Name.Equals(author.Name) && n.Email.Equals(author.Email));
+    }
+
+
 }

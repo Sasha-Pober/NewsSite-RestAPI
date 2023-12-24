@@ -1,6 +1,7 @@
 ﻿using BLL.DTO;
 using BLL.Interfaces;
 using BLL.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.HelpClasses;
 
@@ -32,6 +33,7 @@ public class TagController(ITagService service) : Controller
         }
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> PostTag([FromBody] TagDTO tag)
     {
@@ -46,6 +48,7 @@ public class TagController(ITagService service) : Controller
         }
     }
 
+    [Authorize]
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateTag(int id, [FromBody] TagDTO tag)
     {
@@ -60,6 +63,7 @@ public class TagController(ITagService service) : Controller
         }
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteTag(int id)
     {

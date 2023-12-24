@@ -1,4 +1,5 @@
-﻿using BLL.DTO;
+﻿using AutoMapper;
+using BLL.DTO;
 using DAL.Entities;
 using DAL.Interfaces;
 using System.Reflection.Metadata;

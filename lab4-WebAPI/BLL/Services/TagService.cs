@@ -16,6 +16,8 @@ public class TagService(IUnitOfWork unit, IMapper mapper) : QueryService(unit, m
     {
         _validator.Validate(entity);
 
+        if (await CheckIfExists(entity)) throw new Exception("The tag already exists");
+
         var tag = _mapper.Map<Tag>(entity);
 
         await _unit.TagRepository.Create(tag);
@@ -24,7 +26,7 @@ public class TagService(IUnitOfWork unit, IMapper mapper) : QueryService(unit, m
 
     public async Task Delete(int id)
     {
-        var tag = await _unit.TagRepository.GetById(id) ?? throw new NullReferenceException();
+        var tag = await _unit.TagRepository.GetById(id) ?? throw new Exception("There is no such tag");
         _unit.TagRepository.Delete(tag);
         await _unit.SaveAsync();
     }
@@ -38,7 +40,7 @@ public class TagService(IUnitOfWork unit, IMapper mapper) : QueryService(unit, m
 
     public async Task<TagDTO> GetById(int id)
     {
-        var entity = await _unit.TagRepository.GetById(id);
+        var entity = await _unit.TagRepository.GetById(id) ?? throw new Exception("There is no such tag");
         var tag = _mapper.Map<TagDTO>(entity);
         return tag;
     }
@@ -47,10 +49,19 @@ public class TagService(IUnitOfWork unit, IMapper mapper) : QueryService(unit, m
     {
         _validator.ValidateAndThrow(entity);
 
+        if (await CheckIfExists(entity)) throw new Exception("The tag already exists");
+
         var tag = await _unit.TagRepository.GetById(id);
         tag.Name = entity.Name;
 
         _unit.TagRepository.Update(tag);
         await _unit.SaveAsync();
+    }
+
+    private async Task<bool> CheckIfExists(TagDTO tag)
+    {
+        var collection = await _unit.TagRepository.GetAll();
+
+        return collection.Any(n => n.Name.Equals(tag.Name));
     }
 }

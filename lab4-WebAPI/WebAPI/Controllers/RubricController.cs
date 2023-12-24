@@ -1,5 +1,6 @@
 ﻿using BLL.DTO;
 using BLL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.HelpClasses;
 
@@ -31,6 +32,7 @@ public class RubricController(IRubricService rubricService) : Controller
         }
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> PostRubric([FromBody] RubricDTO rubric)
     {
@@ -45,6 +47,7 @@ public class RubricController(IRubricService rubricService) : Controller
         }
     }
 
+    [Authorize]
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateRubric(int id, [FromBody] RubricDTO rubric)
     {
@@ -59,6 +62,7 @@ public class RubricController(IRubricService rubricService) : Controller
         }
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteRubric(int id)
     {
