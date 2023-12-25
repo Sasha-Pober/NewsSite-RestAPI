@@ -18,7 +18,7 @@ namespace NewsSite.Tests;
 
 internal static class UnitTestHelper
 {
-    /*public static DbContextOptions<NewsSiteContext> GetUnitTestDbOptions()
+    public static DbContextOptions<NewsSiteContext> GetUnitTestDbOptions()
     {
         var options = new DbContextOptionsBuilder<NewsSiteContext>()
             .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
@@ -29,7 +29,7 @@ internal static class UnitTestHelper
         }
 
         return options;
-    }*/
+    }
 
 
     public static IMapper CreateMapperProfile()
@@ -40,13 +40,12 @@ internal static class UnitTestHelper
         return new Mapper(configuration);
     }
 
-    /*public static void FillData(NewsSiteContext context)
+    public static void FillData(NewsSiteContext context)
     {
-        context.Authors.AddRange( new AuthorFaker().Generate(5));
-        context.Rubrics.AddRange(new RubricFaker().Generate(10));
-        context.Tags.AddRange(new TagFaker().Generate(10));
-        context.News.AddRange(new NewsFaker().Generate(10));
-        context.NewsWithTags.AddRange(new NewsWithTagsFaker().Generate(20));
-    }*/
+        context.Authors.AddRange(TestData.Authors);
+        context.Rubrics.AddRange(TestData.Rubrics);
+        context.Tags.AddRange(TestData.Tags);
+        context.News.AddRange(TestData.News);
+    }
 
 }

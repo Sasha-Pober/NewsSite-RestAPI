@@ -1,5 +1,6 @@
 ﻿using BLL.DTO;
 using BLL.Services;
+using DAL;
 using DAL.Entities;
 using DAL.Interfaces;
 using FluentAssertions;
@@ -129,7 +130,22 @@ public class TagServiceTests
 
     }
 
-    /*[Test]
-    public async Task */
+    [Test]
+    [TestCase(200)]
+    public async Task Delete_InValidData_ThrowsException(int id)
+    {
+        //arrange
+        var mockUnitOfWork = new Mock<IUnitOfWork>();
+
+        mockUnitOfWork.Setup(m => m.TagRepository.Delete(It.IsAny<Tag>()));
+
+        var tagService = new TagService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
+
+        //act
+        Func<Task> act = async() => await tagService.Delete(id);
+
+        //assert
+        await act.Should().ThrowAsync<Exception>();
+    }
 
 }
